@@ -19,12 +19,12 @@ void LocalPlanningClass::init(ros::NodeHandle& nh)
 
     // 参数读取
     // 最大速度
-    nh.param("planning/max_planning_vel", max_planning_vel, 0.4);
+    nh.param("planning/max_planning_vel", max_planning_vel, 2.0); //默认值为0.4
     // 激光雷达模型,0代表3d雷达,1代表2d雷达
     // 3d雷达输入类型为 <sensor_msgs::PointCloud2> 2d雷达输入类型为 <sensor_msgs::LaserScan>
     nh.param("planning/lidar_model", lidar_model, 0);
     // 根据参数 planning/algorithm_mode 选择局部避障算法: 0为APF,1为VFH
-    nh.param("planning/algorithm_mode", algorithm_mode, 0);
+    nh.param("planning/algorithm_mode", algorithm_mode, 1);//
 
     // 选择避障算法
     if(algorithm_mode==0){
@@ -181,7 +181,7 @@ void LocalPlanningClass::execFSMCallback(const ros::TimerEvent& e){
     control_time = ros::Time::now();
     // pos_cmd_pub.publish(cmd);
     if((end_pt_-start_pt_).norm() < 0.05){
-        // printf("reach the goal!\n");
+        printf("reach the goal!\n");
     }
 
     // visualization_->drawPath(kino_path, 0.1, Eigen::Vector4d(1, 0, 0, 1));  // red
@@ -252,7 +252,7 @@ void LocalPlanningClass::laserscanCallback(const sensor_msgs::LaserScanConstPtr 
 {
     /* need odom_ for center radius sensing */
     if (!have_odom_) {
-        // ROS_INFO("local point cloud: --- no odom!---");
+        ROS_INFO("local point cloud: --- no odom!---");
         return;
     }
 
@@ -327,12 +327,12 @@ void LocalPlanningClass::getOccupancyMarker(visualization_msgs::Marker &m, int i
     // iterate the map
     pcl::PointXYZ pt;
     Eigen::Matrix<double, 3, 3> rotation_mat_local_to_global = Eigen::Quaterniond(odom_.pose.pose.orientation.w,
-                                                                                                                                                                            odom_.pose.pose.orientation.x,
-                                                                                                                                                                            odom_.pose.pose.orientation.y,
-                                                                                                                                                                            odom_.pose.pose.orientation.z).toRotationMatrix();
+                                                                                odom_.pose.pose.orientation.x,
+                                                                                odom_.pose.pose.orientation.y,
+                                                                                odom_.pose.pose.orientation.z).toRotationMatrix();
     Eigen::Matrix<double, 3, 1> position_world_to_local (odom_.pose.pose.position.x,
-                                                                                                                    odom_.pose.pose.position.y,
-                                                                                                                    odom_.pose.pose.position.z);
+                                                        odom_.pose.pose.position.y,
+                                                        odom_.pose.pose.position.z);
     Eigen::Matrix<double, 3, 1> pointd;
     for (size_t i = 0; i < latest_local_pcl_.points.size(); ++i) {
         pt = latest_local_pcl_.points[i];

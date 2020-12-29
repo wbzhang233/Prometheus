@@ -75,7 +75,7 @@ void laser_cb(const tf2_msgs::TFMessage::ConstPtr &msg)
 {
     //确定是cartographer发出来的/tf信息
     //有的时候/tf这个消息的发布者不止一个
-    //可改成ＴＦ监听
+    //可改成tf监听
     if (msg->transforms[0].header.frame_id == "map" && msg->transforms[0].child_frame_id == "base_link" && input_source == 1)  
     {
         laser = msg->transforms[0];

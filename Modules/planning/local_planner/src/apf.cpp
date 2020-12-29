@@ -108,14 +108,14 @@ int APF::compute_force(Eigen::Matrix<double, 3, 1> &goal, Eigen::Matrix<double, 
     }
 
     Eigen::Quaterniond cur_rotation_local_to_global(cur_odom_.pose.pose.orientation.w, 
-                                                                                                            cur_odom_.pose.pose.orientation.x,  
-                                                                                                            cur_odom_.pose.pose.orientation.y,  
-                                                                                                            cur_odom_.pose.pose.orientation.z); 
+                                                    cur_odom_.pose.pose.orientation.x,  
+                                                    cur_odom_.pose.pose.orientation.y,  
+                                                    cur_odom_.pose.pose.orientation.z); 
 
     // printf("odom q:[%f, %f, %f, %f]\n", cur_odom_.pose.pose.orientation.w, 
-    //                                                                                                         cur_odom_.pose.pose.orientation.x,  
-    //                                                                                                         cur_odom_.pose.pose.orientation.y,  
-    //                                                                                                         cur_odom_.pose.pose.orientation.z);
+    // cur_odom_.pose.pose.orientation.x,  
+    // cur_odom_.pose.pose.orientation.y,  
+    // cur_odom_.pose.pose.orientation.z);
 
     Eigen::Matrix<double,3,3> rotation_mat_local_to_global = cur_rotation_local_to_global.toRotationMatrix();
 
@@ -123,8 +123,8 @@ int APF::compute_force(Eigen::Matrix<double, 3, 1> &goal, Eigen::Matrix<double, 
     push_force = rotation_mat_local_to_global * push_force; 
 
     if(uav_height<ground_safe_height){
-            // printf("[compute_force]: near the ground, the height%f \n", uav_height);
-            push_force = push_force + Eigen::Matrix<double, 3, 1>(0, 0, (ground_safe_height-uav_height)*3.0);
+        // printf("[compute_force]: near the ground, the height%f \n", uav_height);
+        push_force = push_force + Eigen::Matrix<double, 3, 1>(0, 0, (ground_safe_height-uav_height)*3.0);
     }
 
 

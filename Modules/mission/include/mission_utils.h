@@ -52,7 +52,7 @@ struct Detection_result
     string object_name;
     // 视觉检测原始信息，返回的结果为相机坐标系
     // 方向定义： 识别算法发布的目标位置位于相机坐标系（从相机往前看，物体在相机右方x为正，下方y为正，前方z为正）
-    // 标志位：   detected 用作标志位 ture代表识别到目标 false代表丢失目标
+    // 标志位：   detected 用作标志位 true代表识别到目标 false代表丢失目标
     prometheus_msgs::DetectionInfo Detection_info;      
     // 目标在机体系位置
     Eigen::Vector3f pos_body_frame;   
