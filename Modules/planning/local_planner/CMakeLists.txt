@@ -18,9 +18,6 @@ find_package(catkin REQUIRED COMPONENTS
        visualization_msgs
 	   prometheus_msgs
           mavros_msgs
-	)
-
-
 catkin_package(
        INCLUDE_DIRS include
        LIBRARIES potential_field_planning
