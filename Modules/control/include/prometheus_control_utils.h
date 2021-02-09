@@ -20,6 +20,7 @@
 #include <prometheus_msgs/AttitudeReference.h>
 #include <prometheus_msgs/ControlOutput.h>
 #include <prometheus_msgs/LogMessage.h>
+#include <prometheus_msgs/LogMessageControl.h>
 #include <nav_msgs/Odometry.h>
 #include <nav_msgs/Path.h>
 

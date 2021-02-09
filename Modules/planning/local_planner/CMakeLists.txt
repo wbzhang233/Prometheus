@@ -20,7 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
           mavros_msgs
 catkin_package(
        INCLUDE_DIRS include
-       LIBRARIES potential_field_planning
+       LIBRARIES Local_Planning
        #  DEPENDS system_lib
 	)
 
@@ -46,7 +46,6 @@ add_executable(local_planner_main
 	src/planner_node.cpp
 	src/local_planning.cpp
 	src/apf.cpp
-	src/planning_visualization.cpp
        src/tools.cpp
        src/vfh.cpp
 	)
